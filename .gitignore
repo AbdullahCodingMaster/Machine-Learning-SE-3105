@@ -1,0 +1,44 @@
+# Ignore temporary and backup files created by the OS
+.DS_Store
+Thumbs.db
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore output files (if generated during execution)
+*.out
+*.log
+
+# Ignore large datasets (optional: add specific file patterns or paths)
+# data/
+# .csv
+# *.tsv
+# *.json
+# *.xml
+# *.parquet
+
+# Ignore specific IDE-related settings (e.g., VSCode, PyCharm)
+.vscode/
+.idea/
+
+# Ignore system-level temporary files
+*.swp
+*.swo
+~*
+
+# Uncomment below if you are using pip-tools for dependency management
+# requirements.txt
+# *.lock
+
+# Note: Do not ignore .ipynb files unless they contain sensitive data
+# Uncomment below to exclude all notebooks (rare use case)
+# *.ipynb
