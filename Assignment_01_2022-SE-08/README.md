@@ -132,10 +132,9 @@ class EFSModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
+```
 
 ### Explanation:
 - **Images**: The placeholders for images (e.g., `media/image2.png`) should be replaced with the actual paths to the images generated during the analysis.
 - **Code Snippets**: The code snippets provide a glimpse of the neural network architecture and the preprocessing steps.
 - **Training and Testing**: The training and testing notebooks are linked, and the key steps are summarized.
-
-You can now replace the placeholders with the actual image paths and update the links to the Kaggle notebooks if they are hosted online.
