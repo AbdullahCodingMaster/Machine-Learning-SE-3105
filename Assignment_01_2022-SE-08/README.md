@@ -55,7 +55,7 @@ This project predicts **Event-Free Survival (EFS)** for patients post-Hematopoie
 </p>
 <p align="center">
   <img src="media/image5.png" alt="Description of Data" >
-  <br><em>Figure 1-a: Statistical Summary of Dataset (from Analysis Report)</em>
+  <br><em>Figure 1-b: Statistical Summary of Dataset (from Analysis Report)</em>
 </p>
 
 ---
