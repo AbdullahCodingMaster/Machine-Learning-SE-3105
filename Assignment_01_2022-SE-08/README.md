@@ -50,8 +50,12 @@ This project predicts **Event-Free Survival (EFS)** for patients post-Hematopoie
 - **Key Features:** `prim_disease_hct`, `hla_match_b_low`, `prod_type`, `year_hct`, `obesity`, `donor_age`, `prior_tumor`, `gvhd_proph`, `sex_match`, `comorbidity_score`, `karnofsky_score`, `donor_related`, `age_at_hct`
 
 <p align="center">
-  <img src="media/image4.png" alt="Description of Data" width="400">
-  <br><em>Figure 1: Statistical Summary of Dataset (from Analysis Report)</em>
+  <img src="media/image4.png" alt="Description of Data" >
+  <br><em>Figure 1-a: Statistical Summary of Dataset (from Analysis Report)</em>
+</p>
+<p align="center">
+  <img src="media/image5.png" alt="Description of Data" >
+  <br><em>Figure 1-a: Statistical Summary of Dataset (from Analysis Report)</em>
 </p>
 
 ---
@@ -96,7 +100,7 @@ df_test = df_test[selected_columns]
 Handles missing values, encodes categorical variables, and scales numerical features.
 
 <p align="center">
-  <img src="media/image2.png" alt="Missing Values" width="400">
+  <img src="media/image2.png" alt="Missing Values" >
   <br><em>Figure 2: Visualization of Missing Values (from Analysis Report)</em>
 </p>
 
@@ -262,7 +266,7 @@ print("XGBoost predictions saved!")
 - **XGBoost**: Trained for 100 rounds with log loss metric, leveraging gradient boosting for robust predictions.
 
 <p align="center">
-  <img src="media/image6.png" alt="Correlation Analysis" width="400">
+  <img src="media/image6.png" alt="Correlation Analysis" >
   <br><em>Figure 3: Correlation Analysis of Key Features (from Analysis Report)</em>
 </p>
 
@@ -274,7 +278,7 @@ print("XGBoost predictions saved!")
 - **Evaluation Metrics**: Add AUC-ROC or precision-recall curves.
 
 <p align="center">
-  <img src="media/image3.png" alt="Outliers" width="400">
+  <img src="media/image3.png" alt="Outliers" >
   <br><em>Figure 4: Outlier Detection (from Analysis Report)</em>
 </p>
 
@@ -296,10 +300,3 @@ print("XGBoost predictions saved!")
 </p>
 
 ---
-
-### Notes on Styling
-- **Academic Header**: Added a formal university header with a table for course and submission details.
-- **Emojis**: Used sparingly (e.g., 📖, 🚀) to highlight sections without overwhelming the academic tone.
-- **Images**: Integrated screenshots from `media/` (e.g., `image2.png`, `image3.png`) as referenced in your analysis report. Replace placeholders with actual paths if available.
-- **Code Blocks**: Formatted with triple backticks and language specification for syntax highlighting.
-- **Tables and Alignment**: Used tables and centered elements for a clean layout.
