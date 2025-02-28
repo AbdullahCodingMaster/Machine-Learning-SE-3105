@@ -1,140 +1,305 @@
-# Machine Learning Assignment 1 - Analysis Report
+# Machine Learning Assignment 1 - Survival Prediction Post-HCT
 
-## Overview
-This report presents a comprehensive analysis of a dataset provided for a competition. The dataset contains 28,800 entries with 60 attributes, including medical, genetic, and demographic data. The objective is to analyze the dataset and identify key insights related to patient survival outcomes.
-
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Data Overview](#data-overview)
-3. [Methodology](#methodology)
-   - [Dataset Description](#dataset-description)
-   - [Data Preprocessing](#data-preprocessing)
-   - [Model Selection](#model-selection)
-4. [Results and Discussion](#results-and-discussion)
-   - [Model Evaluation](#model-evaluation)
-   - [ROC Curve](#roc-curve)
-5. [Statistical Summary](#statistical-summary)
-6. [Outliers](#outliers)
-7. [Correlation Analysis](#correlation-analysis)
-8. [Conclusion](#conclusion)
-
-## Introduction
-The dataset consists of patient survival records, with both categorical and numerical features. The key columns include patient ID, HLA match scores, comorbidity scores, demographic details, and the target variables: `efs` (event-free survival) and `efs_time` (survival duration in months).
-
-## Data Overview
-The dataset contains both numerical and categorical variables. The key features include:
-- **efs** (Event-Free Survival) - Target Variable
-- **efs_time** - Duration of survival
-- **Other clinical attributes**
-
-## Methodology
-
-### Dataset Description
-The dataset is divided into training and testing sets, with preprocessing applied to ensure data quality. The key features include:
-- **efs** (Event-Free Survival) - Target Variable
-- **efs_time** - Duration of survival
-- **Other clinical attributes**
-
-### Data Preprocessing
-The following preprocessing steps were performed:
-
-1. **Handling Missing Values**: A significant portion of the dataset contains missing values. Missing values were imputed using the KNN Imputer.
-
-   ![Missing Values](media/image2.png)
-   *Figure 1: Missing Values*
-
-2. **Feature Encoding**: Categorical features were transformed using One-Hot Encoding.
-
-3. **Dealing with Outliers**: Outliers were replaced by the median.
-
-   ![Outliers](media/image3.png)
-   *Figure 5: Outliers*
-
-4. **Feature Scaling**: Numerical features were normalized using StandardScaler.
-
-5. **Train-Test Split**: The dataset was divided into an 80-20 training-validation split.
-
-### Model Selection
-Logistic Regression was chosen for its interpretability and efficiency in binary classification problems. The model was configured with:
-- **Max Iterations**: 1000
-- **Random State**: 42
-- **Performance Metric**: AUC-ROC
-
-## Results and Discussion
-
-### Model Evaluation
-The model's predictive performance was evaluated using the AUC-ROC score. The obtained AUC score was satisfactory, indicating the model's effectiveness in distinguishing survival outcomes.
-
-### ROC Curve
-The ROC curve illustrates the model's ability to differentiate between positive and negative survival outcomes.
-
-## Statistical Summary
-- **efs** (event-free survival) is a binary variable, with roughly 53.9% of entries indicating survival (1) and 46.1% indicating an event (0).
-- **efs_time** has an average value of 23.2 months, with a standard deviation of 24.8 months.
-- **age_at_hct** ranges from 0.04 to 73.7 years, with a mean age of 38.6 years.
-- **karnofsky_score** measures health status, averaging 83.8, with a minimum of 40 and a maximum of 100.
-- **HLA match scores** mostly range from 0 to 2, showing genetic compatibility levels.
-
-![Description of Data](media/image4.png)
-*Figure 3: Description of Data*
-
-![Description of Data (b)](media/image5.png)
-*Figure 4: Description of Data (b)*
-
-## Correlation Analysis
-- Stronger HLA matches tend to correlate with higher event-free survival rates.
-- Age and comorbidity scores show a negative correlation with efs, suggesting that older patients with higher comorbidities have lower survival rates.
-- **karnofsky_score** positively correlates with efs, indicating better survival for healthier individuals.
-
-![Correlation](media/image6.png)
-*Figure 6: Correlation*
-
-## Conclusion
-The dataset contains valuable insights into survival outcomes based on genetic compatibility and health conditions. However, the high percentage of missing values in some columns requires careful handling, such as imputation or removal of incomplete records. Further analysis can be conducted using machine learning models to predict survival outcomes based on these attributes.
+<p align="center">
+  <strong>The University of Azad Jammu and Kashmir, Muzaffarabad</strong><br>
+  <em>Department of Software Engineering</em><br>
+  <em>Bachelor of Science in Software Engineering (2022-2026)</em>
+</p>
 
 ---
 
-## Training and Testing Code
+<table align="center" width="100%">
+  <tr>
+    <th>Course Details</th>
+    <th>Submission Details</th>
+  </tr>
+  <tr>
+    <td>
+      <strong>Course Title:</strong> Machine Learning<br>
+      <strong>Course Code:</strong> SE-3105<br>
+      <strong>Instructor:</strong> Engr. Ahmed Khawaja<br>
+      <strong>Semester:</strong> Fall 2024<br>
+      <strong>Session:</strong> 2022 – 2026
+    </td>
+    <td>
+      <strong>Submitted By:</strong><br>
+      - Roll Number: 2022-SE-08<br>
+      - Roll Number: 2022-SE-18<br>
+      <strong>Degree Program:</strong> BS Software Engineering<br>
+      <strong>Submitted To:</strong> Engr. Ahmed Khawaja<br>
+      <strong>Date:</strong> February 28, 2025
+    </td>
+  </tr>
+</table>
 
-The actual training and testing code for this assignment is implemented in two Kaggle notebooks:
+---
 
-1. **Training Notebook**: [training-hct-survival.ipynb](training-hct-survival.ipynb)
-   - This notebook contains the code for loading the dataset, preprocessing the data, defining the neural network model, and training the model.
-   - The model is saved as `efs_model.pth` and the preprocessors are saved in the `preprocessor` directory.
+## 📖 Overview
+This project predicts **Event-Free Survival (EFS)** for patients post-Hematopoietic Cell Transplantation (HCT) using two machine learning models: an **Artificial Neural Network (ANN)** and an **XGBoost model**. The dataset is sourced from the Kaggle competition "Equity Post-HCT Survival Predictions" and includes medical, genetic, and demographic features. The project demonstrates data preprocessing, model training, and prediction generation, culminating in submission files for evaluation.
 
-2. **Testing Notebook**: [testing-hct-survival.ipynb](testing-hct-survival.ipynb)
-   - This notebook contains the code for loading the pre-trained model and preprocessors, preprocessing the test data, and making predictions.
-   - The predictions are saved in a `submission.csv` file.
+### 📂 Project Files
+- **Training (ANN)**: `training-hct-survival-ann.ipynb` - Trains an ANN model and saves it as `efs_model.pth`.
+- **Testing (ANN)**: `testing-hct-survival-ann.ipynb` - Uses the pre-trained ANN to predict on the test set.
+- **Training (XGBoost)**: `training-hct-survival-xgboost.ipynb` - Trains an XGBoost model and saves it as `xgboost_model.model`.
+- **Testing (XGBoost)**: `testing-hct-survival-xgboost.ipynb` - Uses the pre-trained XGBoost model for predictions.
 
-### Key Steps in the Code:
-- **Data Preprocessing**: Missing values are handled using imputation, categorical features are encoded, and numerical features are scaled.
-- **Model Architecture**: A neural network with two hidden layers and dropout for regularization is used.
-- **Training**: The model is trained for 100 epochs, and the best model is saved based on validation loss.
-- **Testing**: The pre-trained model is used to make predictions on the test dataset.
+### 📊 Dataset
+- **Source:** Kaggle competition (`train.csv`, `test.csv`)
+- **Size:** 28,800 entries, 60 attributes
+- **Target:** `efs` (binary: 0 = event, 1 = survival)
+- **Key Features:** `prim_disease_hct`, `hla_match_b_low`, `prod_type`, `year_hct`, `obesity`, `donor_age`, `prior_tumor`, `gvhd_proph`, `sex_match`, `comorbidity_score`, `karnofsky_score`, `donor_related`, `age_at_hct`
 
-### Example Code Snippet:
+<p align="center">
+  <img src="media/image4.png" alt="Description of Data" width="400">
+  <br><em>Figure 1: Statistical Summary of Dataset (from Analysis Report)</em>
+</p>
+
+---
+
+## 🚀 Project Workflow
+The project is structured into five key phases, executed across both ANN and XGBoost implementations:
+
+1. **Data Loading**  
+2. **Data Preprocessing**  
+3. **Model Definition and Training**  
+4. **Model Testing and Prediction**  
+5. **Submission File Generation**
+
+### 1. Data Loading
+Loads training and test datasets from the Kaggle input directory.
+
+#### ANN - Training
 ```python
-# Define the neural network model
+import pandas as pd
+train_file_path = "/kaggle/input/equity-post-HCT-survival-predictions/train.csv"
+df = pd.read_csv(train_file_path)
+selected_columns = ["prim_disease_hct", "hla_match_b_low", "prod_type", "year_hct", "obesity", 
+                    "donor_age", "prior_tumor", "gvhd_proph", "sex_match", "comorbidity_score", 
+                    "karnofsky_score", "donor_related", "age_at_hct", "efs"]
+df = df[selected_columns]
+print(df.head())
+```
+
+#### XGBoost - Testing
+```python
+test_file_path = "/kaggle/input/equity-post-HCT-survival-predictions/test.csv"
+df_test = pd.read_csv(test_file_path)
+selected_columns = ["prim_disease_hct", "hla_match_b_low", "prod_type", "year_hct", "obesity", 
+                    "donor_age", "prior_tumor", "gvhd_proph", "sex_match", "comorbidity_score", 
+                    "karnofsky_score", "donor_related", "age_at_hct"]
+df_test = df_test[selected_columns]
+```
+
+---
+
+### 2. Data Preprocessing
+Handles missing values, encodes categorical variables, and scales numerical features.
+
+<p align="center">
+  <img src="media/image2.png" alt="Missing Values" width="400">
+  <br><em>Figure 2: Visualization of Missing Values (from Analysis Report)</em>
+</p>
+
+#### ANN - Training
+```python
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+import joblib
+
+num_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+cat_cols = df.select_dtypes(include=['object']).columns.tolist()
+num_cols.remove("efs")
+
+num_imputer = SimpleImputer(strategy='median')
+df[num_cols] = num_imputer.fit_transform(df[num_cols])
+cat_imputer = SimpleImputer(strategy='most_frequent')
+df[cat_cols] = cat_imputer.fit_transform(df[cat_cols])
+
+encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+encoded_cats = encoder.fit_transform(df[cat_cols])
+df_encoded = pd.DataFrame(encoded_cats, columns=encoder.get_feature_names_out(cat_cols))
+df = df.drop(columns=cat_cols).join(df_encoded)
+
+scaler = StandardScaler()
+df[num_cols] = scaler.fit_transform(df[num_cols])
+
+joblib.dump(num_imputer, "./preprocessor/num_imputer.pkl")
+joblib.dump(cat_imputer, "./preprocessor/cat_imputer.pkl")
+joblib.dump(encoder, "./preprocessor/encoder.pkl")
+joblib.dump(scaler, "./preprocessor/scaler.pkl")
+```
+
+#### XGBoost - Testing
+```python
+num_cols = joblib.load("/kaggle/input/training-hct-survival/num_cols.pkl")
+cat_cols = joblib.load("/kaggle/input/training-hct-survival/cat_cols.pkl")
+num_imputer = joblib.load("/kaggle/input/training-hct-survival/num_imputer.pkl")
+cat_imputer = joblib.load("/kaggle/input/training-hct-survival/cat_imputer.pkl")
+encoder = joblib.load("/kaggle/input/training-hct-survival/encoder.pkl")
+scaler = joblib.load("/kaggle/input/training-hct-survival/scaler.pkl")
+
+for col in cat_cols:
+    if col not in df_test.columns:
+        df_test[col] = np.nan
+
+df_test[cat_cols] = cat_imputer.transform(df_test[cat_cols])
+encoded_cats_test = encoder.transform(df_test[cat_cols])
+df_test_encoded = pd.DataFrame(encoded_cats_test, columns=encoder.get_feature_names_out(cat_cols))
+df_test = df_test.drop(columns=cat_cols, errors='ignore').join(df_test_encoded)
+df_test[num_cols] = scaler.transform(df_test[num_cols])
+```
+
+---
+
+### 3. Model Definition and Training
+Defines and trains the ANN and XGBoost models.
+
+#### ANN - Training
+```python
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
+
 class EFSModel(nn.Module):
     def __init__(self, input_size):
         super(EFSModel, self).__init__()
         self.model = nn.Sequential(
-            nn.Linear(input_size, 128),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Dropout(0.3),
-            nn.Linear(64, 1),
-            nn.Sigmoid()
+            nn.Linear(input_size, 128), nn.ReLU(), nn.Dropout(0.3),
+            nn.Linear(128, 64), nn.ReLU(), nn.Dropout(0.3),
+            nn.Linear(64, 1), nn.Sigmoid()
         )
-
     def forward(self, x):
         return self.model(x)
 
+X_train_tensor = torch.tensor(X_train.values, dtype=torch.float32)
+y_train_tensor = torch.tensor(y_train.values, dtype=torch.float32).view(-1, 1)
+train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+
+model = EFSModel(input_size=X_train.shape[1]).to(device)
+criterion = nn.BCELoss()
+optimizer = optim.Adam(model.parameters(), lr=0.00001)
+
+for epoch in range(100):
+    model.train()
+    train_loss = 0.0
+    for X_batch, y_batch in train_loader:
+        X_batch, y_batch = X_batch.to(device), y_batch.to(device)
+        optimizer.zero_grad()
+        outputs = model(X_batch)
+        loss = criterion(outputs, y_batch)
+        loss.backward()
+        optimizer.step()
+        train_loss += loss.item()
+    print(f"Epoch {epoch+1}/100 - Train Loss: {train_loss/len(train_loader):.4f}")
+    torch.save(model.state_dict(), "/kaggle/working/efs_model.pth")
 ```
 
-### Explanation:
-- **Images**: The placeholders for images (e.g., `media/image2.png`) should be replaced with the actual paths to the images generated during the analysis.
-- **Code Snippets**: The code snippets provide a glimpse of the neural network architecture and the preprocessing steps.
-- **Training and Testing**: The training and testing notebooks are linked, and the key steps are summarized.
+#### XGBoost - Training
+```python
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+dtrain = xgb.DMatrix(X_train, label=y_train)
+dval = xgb.DMatrix(X_val, label=y_val)
+
+params = {
+    'objective': 'binary:logistic', 'eval_metric': 'logloss',
+    'max_depth': 6, 'eta': 0.1, 'subsample': 0.8, 'colsample_bytree': 0.8, 'seed': 42
+}
+
+bst = xgb.train(params, dtrain, num_round=100, evals=[(dval, 'validation')])
+bst.save_model("xgboost_model.model")
+```
+
+---
+
+### 4. Model Testing and Prediction
+Loads pre-trained models and generates predictions.
+
+#### ANN - Testing
+```python
+X_test_tensor = torch.tensor(df_test.values, dtype=torch.float32).to(device)
+model = EFSModel(input_size=df_test.shape[1]).to(device)
+model.load_state_dict(torch.load("/kaggle/input/training-hct-survival/efs_model.pth", map_location=device))
+model.eval()
+with torch.no_grad():
+    predictions = model(X_test_tensor).cpu().numpy().flatten()
+```
+
+#### XGBoost - Testing
+```python
+dtest = xgb.DMatrix(df_test)
+bst = xgb.Booster()
+bst.load_model("/kaggle/input/training-hct-survival/xgboost_model.model")
+predictions = bst.predict(dtest)
+```
+
+---
+
+### 5. Submission File Generation
+Creates submission files with predictions.
+
+#### ANN - Testing
+```python
+submission = pd.DataFrame({"ID": patient_ids, "prediction": predictions})
+submission.to_csv("/kaggle/working/submission.csv", index=False)
+print("✅ Submission file saved as 'submission.csv'")
+```
+
+#### XGBoost - Testing
+```python
+submission = pd.DataFrame({"ID": df_test.index, "prediction": predictions})
+submission.to_csv("submission.csv", index=False)
+print("XGBoost predictions saved!")
+```
+
+---
+
+## 📈 Results
+- **ANN**: Trained for 100 epochs, validation loss reduced to 0.6129. Outputs probabilities via sigmoid.
+- **XGBoost**: Trained for 100 rounds with log loss metric, leveraging gradient boosting for robust predictions.
+
+<p align="center">
+  <img src="media/image6.png" alt="Correlation Analysis" width="400">
+  <br><em>Figure 3: Correlation Analysis of Key Features (from Analysis Report)</em>
+</p>
+
+---
+
+## 🔧 Improvements
+- **Hyperparameter Tuning**: Adjust learning rates, ANN layer sizes, or XGBoost parameters (e.g., `max_depth`, `eta`).
+- **Feature Engineering**: Introduce interaction terms or derived features.
+- **Evaluation Metrics**: Add AUC-ROC or precision-recall curves.
+
+<p align="center">
+  <img src="media/image3.png" alt="Outliers" width="400">
+  <br><em>Figure 4: Outlier Detection (from Analysis Report)</em>
+</p>
+
+---
+
+## 🛠️ How to Run
+1. **Environment**: Kaggle Notebook, Python 3.10.12, libraries: `pandas`, `numpy`, `torch`, `xgboost`, `sklearn`, `joblib`.
+2. **Steps**:
+   - Run `training-hct-survival-ann.ipynb` to train the ANN.
+   - Run `training-hct-survival-xgboost.ipynb` to train XGBoost.
+   - Run `testing-hct-survival-ann.ipynb` for ANN predictions.
+   - Run `testing-hct-survival-xgboost.ipynb` for XGBoost predictions.
+
+---
+
+<p align="center">
+  <strong>Thank You!</strong><br>
+  For inquiries, contact the Department of Software Engineering, UAJK.
+</p>
+
+---
+
+### Notes on Styling
+- **Academic Header**: Added a formal university header with a table for course and submission details.
+- **Emojis**: Used sparingly (e.g., 📖, 🚀) to highlight sections without overwhelming the academic tone.
+- **Images**: Integrated screenshots from `media/` (e.g., `image2.png`, `image3.png`) as referenced in your analysis report. Replace placeholders with actual paths if available.
+- **Code Blocks**: Formatted with triple backticks and language specification for syntax highlighting.
+- **Tables and Alignment**: Used tables and centered elements for a clean layout.
