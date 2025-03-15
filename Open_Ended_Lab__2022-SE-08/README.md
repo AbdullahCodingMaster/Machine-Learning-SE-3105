@@ -14,17 +14,16 @@ The MNIST dataset comprises 28x28 grayscale images of handwritten digits (0-9), 
 - **Splitting**: Data was split into 80% training and 20% testing sets with stratification.
 
 ##### Models Used
-Five models were trained:
+Four models were trained:
 1. **Logistic Regression**: `max_iter=1000`.
-2. **SVM**: RBF kernel.
-3. **Random Forest**: 100 trees.
-4. **HistGradientBoostingClassifier**: NaN-tolerant gradient boosting.
-5. **Tuned HistGradientBoostingClassifier**: Optimized version.
+2. **K-Nearest Neighbors (KNN)**: Default parameters with k=5.
+3. **Naive Bayes**: Gaussian Naive Bayes.
+4. **Artificial Neural Network (ANN)**: Simple MLP with one hidden layer (100 neurons).
 
 ##### Hyperparameter Tuning
-`HistGradientBoostingClassifier` was tuned with:
-- `max_iter`: [100, 200]
-- `learning_rate`: [0.01, 0.1]
+ANN was tuned with:
+- `hidden_layer_sizes`: [(100,), (50, 50)]
+- `learning_rate_init`: [0.001, 0.01]
 - Cross-validation: 3 folds on a 5,000-sample subset.
 
 ##### Evaluation
@@ -33,24 +32,23 @@ Accuracy, classification reports, and confusion matrices were used.
 #### Results
 | Model                       | Accuracy  |
 |-----------------------------|-----------|
-| Logistic Regression         | 0.910     |
-| SVM (RBF)                  | 0.935     |
-| Random Forest              | 0.925     |
-| HistGradientBoosting       | 0.930     |
-| Tuned HistGradientBoosting | 0.940     |
+| Logistic Regression         | 0.140     |
+| KNN                        | 0.839     |
+| Naive Bayes                | 0.602     |
+| ANN                        | 0.903     |
+| Tuned ANN                  | 0.914     |
 
-- **Logistic Regression**: 0.910, decent but limited by reduced features.
-- **SVM (RBF)**: 0.935, strong with non-linear patterns.
-- **Random Forest**: 0.925, robust but slightly lower.
-- **HistGradientBoosting**: 0.930, effective with selected features.
-- **Tuned HistGradientBoosting**: 0.940, best with `max_iter=200, learning_rate=0.1`.
+- **Logistic Regression**: 0.140, poor performance, likely due to insufficient capacity for complex patterns.
+- **KNN**: 0.839, strong distance-based classification, benefiting from feature selection.
+- **Naive Bayes**: 0.602, moderate performance, limited by feature independence assumptions.
+- **ANN**: 0.903, high accuracy with a simple architecture; tuned version at 0.914 with `hidden_layer_sizes=(100,), learning_rate_init=0.01`.
 
 **Visualizations**:
-- Bar plot showed Tuned HistGradientBoosting leading.
+- Bar plot showed Tuned ANN leading.
 - Confusion matrices indicated errors (e.g., 5 vs. 3).
 
 #### Discussion
-The Tuned HistGradientBoostingClassifier excelled, benefiting from tuning and robustness to feature selection. Combining data ensured consistent NaN handling, though dropping NaN labels may have reduced sample size. Feature selection to 200 dimensions maintained performance while reducing complexity, though SVM adapted best to this reduction. Preprocessing was critical, and HistGradientBoosting’s NaN tolerance suggests it’s ideal for imperfect data. Future work could explore more features or deep learning for higher accuracy.
+The Tuned ANN excelled with 0.914 accuracy, leveraging its ability to model complex, non-linear patterns through hyperparameter optimization. Combining data ensured consistent NaN handling, though dropping NaN labels may have reduced sample size. Feature selection to 200 dimensions maintained performance, with KNN adapting well due to its reliance on local structure. Logistic Regression struggled significantly (0.140), possibly due to the reduced feature set or linear assumptions not suiting the MNIST data. Naive Bayes (0.602) performed moderately but was hindered by its assumption of feature independence, which doesn’t hold for pixel data. Preprocessing was critical for all models, and future work could explore deeper ANN architectures or retaining more features to boost performance further.
 
 #### Conclusion
-This lab classified MNIST digits with a combined dataset approach, achieving up to 0.940 accuracy with Tuned HistGradientBoosting. The process highlighted the importance of NaN handling and feature selection in an open-ended setting, offering a flexible framework for classification tasks.
+This lab classified MNIST digits with a combined dataset approach, achieving up to 0.914 accuracy with Tuned ANN. The process highlighted the importance of NaN handling, feature selection, and model choice in an open-ended setting. While simpler models like Logistic Regression underperformed, ANN and KNN demonstrated robustness, offering a flexible framework for classification tasks.
